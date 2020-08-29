@@ -8,8 +8,7 @@ CSV Query - a small command-line for querying CSV files
 	3) python test_solver.py -v - run system integrated tests for various queries
 3. This is an interactive command-line program which continues reading input from user. Acceptable input types are:
 	1) query string - return query result instantly
-	2) csv file name - peek
-	3) q - quit
+	2) q - quit
 
 # Assumptions
 1. A valid query string must start with "FROM xxx.csv" which loads at least one table.
@@ -17,12 +16,12 @@ CSV Query - a small command-line for querying CSV files
 3. For the JOIN command, the behavior of INNER JOIN in MySQL is applied.
 
 # Commands
-1. FROM command - The ​FROM​ command loads a CSV dataset from disk and prints its contents to standard output, preserving the same column ordering as the file.
-2. SELECT command - The ​SELECT​ command lets you pick particular columns from the loaded dataset and display only those.
-3. TAKE command - The ​TAKE​ command lets you limit the amount of output to display.
-4. ORDERBY command - The ​ORDERBY​ command lets you sort the dataset by a single numeric column (and ​only numeric columns) in descending order.
-5. JOIN command - The ​JOIN​ command allows the user to combine two ​.csv​ datasets based on a common column. Multiple ​JOIN​ calls are also allowed.
-6. COUNTBY command - The ​COUNTBY​ command takes a single column name, and reduces the dataset to only two columns: the specified column after ​COUNTBY​, and a ​count​ column.
+1. FROM command - The FROM command loads a CSV dataset from disk and prints its contents to standard output, preserving the same column ordering as the file.
+2. SELECT command - The SELECT command lets you pick particular columns from the loaded dataset and display only those.
+3. TAKE command - The TAKE command lets you limit the amount of output to display.
+4. ORDERBY command - The ORDERBY command lets you sort the dataset by a single numeric column (and only numeric columns) in descending order.
+5. JOIN command - The JOIN command allows the user to combine two .csv datasets based on a common column. Multiple JOIN calls are also allowed.
+6. COUNTBY command - The COUNTBY command takes a single column name, and reduces the dataset to only two columns: the specified column after COUNTBY, and a count column.
 
 # Examples
 >> FROM city.csv ORDERBY CityPop TAKE 7 SELECT CityName,CityPop

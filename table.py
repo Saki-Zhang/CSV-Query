@@ -130,12 +130,12 @@ class Table:
         for k, v in hashmap.items():
             record = {
                 col_name: k,  # value
-                count: str(v)  # number of appearances
+                count: str(v)  # number of appearances of the value
             }
             records.append(record)
 
         self.records = records
-        self.columns = [col_name, count]  # result will only have two columns: the specified column and a ​count​ column
+        self.columns = [col_name, count]  # result will only have two columns: the specified column and a count column
 
     def print(self):
         if len(self.columns) == 0 and len(self.records) == 0:

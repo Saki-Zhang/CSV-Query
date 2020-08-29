@@ -20,7 +20,7 @@ class CSVQuerySolver:
         :type query: str
         :rtype: Table
         """
-        # remove zero-width spaces in the query string, especially when copied from the .pdf file
+        # remove zero-width spaces in the query string when copying from the .pdf file
         # split the query string into a list of keywords by space
         query = query.replace('\u200b', '').strip()
         kwrds = query.split(' ')
@@ -33,7 +33,7 @@ class CSVQuerySolver:
 
         # FROM xxx.csv
         table_name = kwrds[1]
-        table = self.datasets[table_name].copy()  # get the table from datasets and create a copy
+        table = self.datasets[table_name].copy()  # get the table from datasets
 
         i = 2  # start from index 2
 
@@ -61,7 +61,7 @@ class CSVQuerySolver:
                     arg1 = kwrds[i + 1]  # COLUMN_NAME1[,COLUMN_NAME2,COLUMN_NAME3,...]
                     i += 1
 
-                    assert arg1 not in self.operators
+                    assert arg1 not in self.operators, "Missing column name(s) for SELECT operation"
                 except:
                     raise Exception(
                         "The SELECT cmd should take exactly one input: column names\nCommands: {}".format(kwrds))
@@ -73,7 +73,7 @@ class CSVQuerySolver:
                     arg1 = kwrds[i + 1]  # LIMIT
                     i += 1
 
-                    assert arg1 not in self.operators
+                    assert arg1 not in self.operators, "Missing limit for TAKE operation"
                 except:
                     raise Exception("The TAKE cmd should take exactly one input: limit\nCommands: {}".format(kwrds))
 
@@ -81,13 +81,14 @@ class CSVQuerySolver:
                     limit = int(arg1)
                 except ValueError:
                     raise Exception("Invalid number {} is provided".format(arg1))
+
                 table.take(num_rows=limit)
             elif kwrds[i].upper() == 'ORDERBY':  # ORDERBY COLUMN_NAME
                 try:
                     arg1 = kwrds[i + 1]  # COLUMN_NAME
                     i += 1
 
-                    assert arg1 not in self.operators
+                    assert arg1 not in self.operators, "Missing column name for ORDERBY operation"
                 except:
                     raise Exception(
                         "The ORDERBY cmd should take exactly one input: column name\nCommands: {}".format(kwrds))
@@ -99,7 +100,7 @@ class CSVQuerySolver:
                     arg1 = kwrds[i + 1]  # COLUMN_NAME
                     i += 1
 
-                    assert arg1 not in self.operators
+                    assert arg1 not in self.operators, "Missing column name for COUNTBY operation"
                 except:
                     raise Exception(
                         "The COUNTBY cmd should take exactly one input: column name\nCommands: {}".format(kwrds))

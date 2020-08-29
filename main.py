@@ -16,18 +16,13 @@ if __name__ == '__main__':
 
     solver = CSVQuerySolver(datasets)
 
-    print(">> Please enter your query string, enter a csv file name to view the first 5 rows, enter 'q' to quit...")
-    print()
+    print(">> Please enter your query string, enter 'q' to quit...\n")
 
     while True:
         query = str(input('>> '))  # wait for user to enter a query string
 
         if query == 'q':  # quit
             break
-        elif query.lower() in files:  # peek
-            table = datasets[query.lower()].copy()
-            table.take(5)
-            table.print()
         else:
             try:
                 solver.execute(query)
